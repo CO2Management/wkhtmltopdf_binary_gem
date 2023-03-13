@@ -14,7 +14,7 @@ class WithDockerTest < Minitest::Test
           end
 
   def test_with_ubuntu_22
-   test_on_x86 with: 'ubuntu_22.04'
+   test(with: 'ubuntu_22.04')
   end
 
   def test_with_macos
@@ -23,15 +23,7 @@ class WithDockerTest < Minitest::Test
 
   private
 
-  def test_on_x86(with:)
-    test_on_docker(with: with) if !macos? && !arm?
-  end
-
-  def test_on_x86_and_arm(with:)
-    test_on_docker(with: with) unless macos?
-  end
-
-  def test_on_docker(with:)
-    assert_match(/wkhtmltopdf 0\.12\.6(.1)? \(with patched qt\)/, `docker-compose run --rm #{with}`.strip)
+  def test(with:)
+    assert_equal(`docker-compose run --rm #{with}`.strip, 'wkhtmltopdf 0.12.6.1 (with patched qt)') unless macos?
   end
 end
