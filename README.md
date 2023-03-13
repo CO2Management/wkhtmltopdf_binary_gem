@@ -1,3 +1,7 @@
+# SmartTrackers fork
+
+In this custom fork we only add the binaries for the platforms we need. For Heroku and CircleCI this is Ubuntu 22 and for all the local development machines this is MacOS. This reduces the slug size on Heroku considerably.
+
 # Installation and usage
 
 Install in your Gemfile as usual
