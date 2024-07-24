@@ -26,7 +26,9 @@ suffix = case RbConfig::CONFIG['host_os']
            os = `. /etc/os-release 2> /dev/null && echo ${ID}_${VERSION_ID}`.strip
 
            os = 'ubuntu_22.04' if os.start_with?('ubuntu_22.') ||
-                                  os.start_with?('tuxedo_22.')
+                                  os.start_with?('ubuntu_24.') ||
+                                  os.start_with?('tuxedo_22.') ||
+                                  os.start_with?('tuxedo_24.')
 
            "#{os}_#{architecture}"
          when /darwin/
@@ -46,7 +48,7 @@ if File.exist?("#{binary}.gz") && !File.exist?(binary)
 end
 
 unless File.exist? binary
-  raise 'Invalid platform, must be running on Ubuntu 22.04 or Intel-based Cocoa macOS ' \
+  raise 'Invalid platform, must be running on Ubuntu 22.04 (or 24 ish) or Intel-based Cocoa macOS ' \
         "(missing binary: #{binary})."
 end
 
